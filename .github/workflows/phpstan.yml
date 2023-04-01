@@ -1,0 +1,30 @@
+name: PHPStan run
+on:
+  workflow_dispatch:
+  pull-request:
+    types: 
+      - opened
+    branches:
+      - main
+
+jobs:
+  phpstan:
+    runs-on: "ubuntu-latest"
+    name: PHP Static Analysis
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install Dependencies
+        run: |
+          composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: "Running Static Analysis"
+        run: |
+          vendor/phpstan/phpstan/phpstan --memory-limit=128M analyze app
