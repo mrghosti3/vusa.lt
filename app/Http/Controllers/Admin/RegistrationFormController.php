@@ -16,7 +16,10 @@ class RegistrationFormController extends ResourceController
      */
     public function index()
     {
-        return $this->authorize('viewAny', [Institution::class, $this->authorizer]);
+        return $this->authorize('viewAny', [
+            Institution::class,
+            $this->authorizer
+        ]);
     }
 
     /**

@@ -87,7 +87,11 @@ class PagesController extends ResourceController
      */
     public function show(Page $page)
     {
-        return $this->authorize('view', [Page::class, $page, $this->authorizer]);
+        return $this->authorize('view', [
+            Page::class,
+            $page,
+            $this->authorizer
+        ]);
     }
 
     /**

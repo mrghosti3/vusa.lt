@@ -78,7 +78,11 @@ class NavigationController extends ResourceController
      */
     public function show(Navigation $navigation)
     {
-        return $this->authorize('view', [Navigation::class, $navigation, $this->authorizer]);
+        return $this->authorize('view', [
+            Navigation::class,
+            $navigation,
+            $this->authorizer
+        ]);
     }
 
     /**

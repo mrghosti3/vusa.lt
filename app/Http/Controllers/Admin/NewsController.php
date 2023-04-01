@@ -94,7 +94,11 @@ class NewsController extends ResourceController
      */
     public function show(News $news)
     {
-        return $this->authorize('view', [News::class, $news, $this->authorizer]);
+        return $this->authorize('view', [
+            News::class,
+            $news,
+            $this->authorizer
+        ]);
     }
 
     /**

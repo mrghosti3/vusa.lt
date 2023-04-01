@@ -67,7 +67,11 @@ class GoalGroupController extends ResourceController
      */
     public function show(GoalGroup $goalGroup)
     {
-        return $this->authorize('view', [GoalGroup::class, $goalGroup, $this->authorizer]);
+        return $this->authorize('view', [
+            GoalGroup::class,
+            $goalGroup,
+            $this->authorizer
+        ]);
     }
 
     /**
